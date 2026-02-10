@@ -148,12 +148,12 @@ const DashboardSlides = () => {
       <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
         <h2 className="text-3xl font-bold mb-4 text-slate-100 flex-shrink-0">{t.experience.title}</h2>
         
-        <div className="grid grid-cols-2 gap-6 mb-6 flex-shrink-0" style={{ height: '300px' }}>
+        <div className="grid grid-cols-2 gap-6 mb-6 flex-shrink-0" style={{ height: '350px' }}>
           {/* Left: Career Timeline Chart */}
           <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all h-full overflow-hidden">
             <CardContent className="p-5 h-full flex flex-col">
               <h3 className="text-base font-semibold text-slate-100 mb-2 flex-shrink-0">{t.analytics.careerProgression}</h3>
-              <div className="flex-1" style={{ height: '240px', maxHeight: '240px' }}>
+              <div className="flex-1" style={{ height: '280px', maxHeight: '280px' }}>
                 <CareerTimeline data={cvData.careerTimeline} language={language} />
               </div>
             </CardContent>
@@ -163,7 +163,7 @@ const DashboardSlides = () => {
           <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all h-full overflow-hidden">
             <CardContent className="p-5 h-full flex flex-col">
               <h3 className="text-base font-semibold text-slate-100 mb-2 flex-shrink-0">{t.analytics.sectorDistribution}</h3>
-              <div className="flex-1" style={{ height: '240px', maxHeight: '240px' }}>
+              <div className="flex-1" style={{ height: '280px', maxHeight: '280px' }}>
                 <SectorDistribution data={cvData.sectorDistribution} language={language} />
               </div>
             </CardContent>
