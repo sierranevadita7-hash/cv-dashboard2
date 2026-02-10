@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
+import DashboardSlides from './pages/DashboardSlides';
 import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <LanguageProvider>
         <HashRouter>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<DashboardSlides />} />
           </Routes>
         </HashRouter>
       </LanguageProvider>
