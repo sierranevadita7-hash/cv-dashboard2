@@ -7,9 +7,10 @@ import {
   Download, Languages, TrendingUp, Target, Calendar
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Progress } from '../components/ui/progress';
+import { Separator } from '../components/ui/separator';
 import CareerTimeline from '../components/charts/CareerTimeline';
 import SectorDistribution from '../components/charts/SectorDistribution';
 import TechnologyChart from '../components/charts/TechnologyChart';
@@ -58,7 +59,7 @@ const DashboardSlides = () => {
     // Slide 1: About
     <div key="about" className="h-full w-full flex flex-col justify-center px-12">
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-2 gap-12">
+        <div className="grid grid-cols-2 gap-12 mb-8">
           {/* Left Column */}
           <div>
             <h1 className="text-5xl font-bold mb-4 text-slate-100">
@@ -72,7 +73,7 @@ const DashboardSlides = () => {
             </p>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-2 gap-4">
               {getTranslatedStats().map((stat, index) => (
                 <Card key={index} className="bg-slate-900/50 border-slate-800 shadow-[0_6px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_20px_rgba(6,182,212,0.15)] transition-all">
                   <CardContent className="p-4 flex items-center gap-3">
@@ -86,22 +87,6 @@ const DashboardSlides = () => {
                   </CardContent>
                 </Card>
               ))}
-            </div>
-
-            {/* Contact - Horizontal */}
-            <div className="flex gap-6 text-slate-400">
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-cyan-400" />
-                <span className="text-sm">{cvData.personal.email}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-cyan-400" />
-                <span className="text-sm">{cvData.personal.phone}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-cyan-400" />
-                <span className="text-sm">{getText(cvData.personal.location, language)}</span>
-              </div>
             </div>
           </div>
 
@@ -134,6 +119,22 @@ const DashboardSlides = () => {
             </Button>
           </div>
         </div>
+
+        {/* Contact - Full Width Below */}
+        <div className="flex justify-center gap-8 text-slate-400 pt-6 border-t border-slate-800">
+          <div className="flex items-center gap-2">
+            <Mail className="w-5 h-5 text-cyan-400" />
+            <span className="text-sm">{cvData.personal.email}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Phone className="w-5 h-5 text-cyan-400" />
+            <span className="text-sm">{cvData.personal.phone}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-cyan-400" />
+            <span className="text-sm">{getText(cvData.personal.location, language)}</span>
+          </div>
+        </div>
       </div>
     </div>,
 
@@ -164,57 +165,64 @@ const DashboardSlides = () => {
           </Card>
         </div>
 
-        {/* Experience Cards - Scrollable */}
-        <div className="grid grid-cols-3 gap-4 overflow-y-auto" style={{ maxHeight: '280px' }}>
+        {/* Experience Cards - Expandibles con flechita */}
+        <div className="space-y-3 overflow-y-auto" style={{ maxHeight: '310px' }}>
           {cvData.experience.map((exp) => (
             <Card 
               key={exp.id} 
-              className="bg-slate-900/50 border-slate-800 shadow-[0_6px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_20px_rgba(6,182,212,0.15)] transition-all cursor-pointer"
-              onClick={() => setExpandedExp(expandedExp === exp.id ? null : exp.id)}
+              className="bg-slate-900/50 border-slate-800 shadow-[0_6px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_20px_rgba(6,182,212,0.15)] transition-all"
             >
-              <CardContent className="p-4">
-                <div className="flex items-center gap-2 mb-2 text-xs text-slate-400">
-                  <Calendar className="w-3 h-3 text-cyan-400" />
-                  {getText(exp.period, language)}
-                </div>
-                <h3 className="text-sm font-semibold text-slate-100 mb-1">{getText(exp.position, language)}</h3>
-                <p className="text-xs text-cyan-400 mb-2">{getText(exp.company, language)}</p>
-                
-                {expandedExp === exp.id ? (
-                  <>
-                    <p className="text-xs text-slate-300 mb-2">{getText(exp.description, language)}</p>
-                    <div className="mb-2">
-                      <p className="text-xs font-semibold text-slate-400 mb-1">{t.experience.technologies}:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {getTextArray(exp.technologies, language).slice(0, 4).map((tech, i) => (
-                          <Badge key={i} variant="outline" className="bg-slate-800/50 text-slate-300 border-slate-700 text-xs px-1.5 py-0">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
+              <CardHeader className="cursor-pointer p-4 pb-2" onClick={() => setExpandedExp(expandedExp === exp.id ? null : exp.id)}>
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1 text-xs text-slate-400">
+                      <Calendar className="w-3 h-3 text-cyan-400" />
+                      {getText(exp.period, language)}
                     </div>
-                    <div>
-                      <p className="text-xs font-semibold text-slate-400 mb-1">{t.experience.achievements}:</p>
-                      <ul className="text-xs text-slate-300 space-y-1">
-                        {exp.achievements.slice(0, 2).map((achievement, i) => (
-                          <li key={i} className="flex items-start gap-1">
-                            <TrendingUp className="w-3 h-3 text-emerald-400 mt-0.5 flex-shrink-0" />
-                            <span>{getText(achievement, language)}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </>
-                ) : (
-                  <div className="flex flex-wrap gap-1">
-                    {getTextArray(exp.technologies, language).slice(0, 4).map((tech, i) => (
-                      <Badge key={i} variant="outline" className="bg-slate-800/50 text-slate-300 border-slate-700 text-xs px-1.5 py-0">
-                        {tech}
-                      </Badge>
-                    ))}
+                    <CardTitle className="text-base text-slate-100 mb-1">{getText(exp.position, language)}</CardTitle>
+                    <CardDescription className="text-sm text-cyan-400">{getText(exp.company, language)}</CardDescription>
                   </div>
-                )}
-              </CardContent>
+                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-400 hover:bg-red-500/10">
+                    {expandedExp === exp.id ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                  </Button>
+                </div>
+              </CardHeader>
+              
+              {expandedExp === exp.id && (
+                <CardContent className="pt-0 px-4 pb-4">
+                  <Separator className="mb-3 bg-slate-800" />
+                  <p className="text-sm text-slate-300 mb-3">{getText(exp.description, language)}</p>
+                  
+                  <div className="mb-3">
+                    <h4 className="text-xs font-semibold text-slate-400 mb-2 flex items-center gap-1">
+                      <Code className="w-3 h-3" />
+                      {t.experience.technologies}
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {getTextArray(exp.technologies, language).map((tech, i) => (
+                        <Badge key={i} variant="outline" className="bg-slate-800/50 text-slate-300 border-slate-700 text-xs px-2 py-0.5">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-semibold text-slate-400 mb-2 flex items-center gap-1">
+                      <Target className="w-3 h-3" />
+                      {t.experience.achievements}
+                    </h4>
+                    <ul className="space-y-1.5">
+                      {exp.achievements.map((achievement, i) => (
+                        <li key={i} className="text-xs text-slate-300 flex items-start gap-1.5">
+                          <TrendingUp className="w-3 h-3 text-emerald-400 mt-0.5 flex-shrink-0" />
+                          <span>{getText(achievement, language)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
+              )}
             </Card>
           ))}
         </div>
@@ -296,30 +304,30 @@ const DashboardSlides = () => {
       <div className="max-w-7xl mx-auto w-full">
         <h2 className="text-3xl font-bold mb-4 text-slate-100">{t.education.title}</h2>
         
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-6" style={{ height: '540px' }}>
           {/* Left Column: Charts */}
-          <div className="space-y-4">
-            <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all">
-              <CardContent className="p-5">
+          <div className="flex flex-col gap-4 h-full">
+            <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all flex-1">
+              <CardContent className="p-5 h-full flex flex-col">
                 <h3 className="text-base font-semibold text-slate-100 mb-2">{t.education.certificationProgress}</h3>
-                <div style={{ height: '200px' }}>
+                <div className="flex-1">
                   <CertificationProgress data={cvData.certificationTimeline} language={language} />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all">
-              <CardContent className="p-5">
+            <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all flex-1">
+              <CardContent className="p-5 h-full flex flex-col">
                 <h3 className="text-base font-semibold text-slate-100 mb-2">{t.analytics.impactMetrics}</h3>
-                <div style={{ height: '300px' }}>
+                <div className="flex-1">
                   <ImpactMetrics data={cvData.impactMetrics} language={language} />
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Right Column: Education List */}
-          <div className="space-y-2.5 overflow-y-auto pr-2" style={{ maxHeight: '550px' }}>
+          {/* Right Column: Education List - Same height as left */}
+          <div className="h-full overflow-y-auto pr-2 space-y-2.5">
             {cvData.education.map((edu, index) => (
               <Card 
                 key={index} 
