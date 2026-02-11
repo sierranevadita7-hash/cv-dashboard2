@@ -148,23 +148,23 @@ const DashboardSlides = () => {
       <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
         <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-4 text-slate-100 flex-shrink-0">{t.experience.title}</h2>
         
-        {/* Charts - Hidden on mobile, visible on larger screens */}
-        <div className="hidden lg:grid grid-cols-2 gap-6 mb-6 flex-shrink-0" style={{ height: '350px' }}>
+        {/* Charts - Responsive grid */}
+        <div className="grid grid-cols-2 gap-2 md:gap-6 mb-3 md:mb-6 flex-shrink-0" style={{ minHeight: '140px' }}>
           {/* Left: Career Timeline Chart */}
-          <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all h-full overflow-hidden">
-            <CardContent className="p-5 h-full flex flex-col">
-              <h3 className="text-base font-semibold text-slate-100 mb-2 flex-shrink-0">{t.analytics.careerProgression}</h3>
-              <div className="flex-1" style={{ height: '280px', maxHeight: '280px' }}>
+          <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all overflow-hidden">
+            <CardContent className="p-2 md:p-5 h-full flex flex-col">
+              <h3 className="text-[10px] md:text-base font-semibold text-slate-100 mb-1 md:mb-2 flex-shrink-0">{t.analytics.careerProgression}</h3>
+              <div className="flex-1" style={{ height: '100px', minHeight: '100px' }}>
                 <CareerTimeline data={cvData.careerTimeline} language={language} />
               </div>
             </CardContent>
           </Card>
 
           {/* Right: Sector Distribution */}
-          <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all h-full overflow-hidden">
-            <CardContent className="p-5 h-full flex flex-col">
-              <h3 className="text-base font-semibold text-slate-100 mb-2 flex-shrink-0">{t.analytics.sectorDistribution}</h3>
-              <div className="flex-1" style={{ height: '280px', maxHeight: '280px' }}>
+          <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all overflow-hidden">
+            <CardContent className="p-2 md:p-5 h-full flex flex-col">
+              <h3 className="text-[10px] md:text-base font-semibold text-slate-100 mb-1 md:mb-2 flex-shrink-0">{t.analytics.sectorDistribution}</h3>
+              <div className="flex-1" style={{ height: '100px', minHeight: '100px' }}>
                 <SectorDistribution data={cvData.sectorDistribution} language={language} />
               </div>
             </CardContent>
@@ -293,11 +293,14 @@ const DashboardSlides = () => {
           </Card>
         </div>
 
-        {/* Technology Chart - Hidden on mobile */}
-        <Card className="hidden lg:block bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all">
-          <CardContent className="p-5">
-            <h3 className="text-lg font-semibold text-slate-100 mb-2">{t.analytics.technologyExperience}</h3>
-            <div style={{ height: '320px' }}>
+        {/* Technology Chart - Visible on all screens */}
+        <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all">
+          <CardContent className="p-3 md:p-5">
+            <h3 className="text-sm md:text-lg font-semibold text-slate-100 mb-1 md:mb-2">{t.analytics.technologyExperience}</h3>
+            <div style={{ height: '150px' }} className="md:hidden">
+              <TechnologyChart data={cvData.technologyUsage} language={language} />
+            </div>
+            <div style={{ height: '320px' }} className="hidden md:block">
               <TechnologyChart data={cvData.technologyUsage} language={language} />
             </div>
           </CardContent>
@@ -311,21 +314,21 @@ const DashboardSlides = () => {
         <h2 className="text-xl md:text-3xl font-bold mb-2 md:mb-4 text-slate-100">{t.education.title}</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6 flex-1">
-          {/* Left Column: Charts - Hidden on mobile */}
-          <div className="hidden lg:flex flex-col gap-4 h-full" style={{ height: '560px' }}>
+          {/* Left Column: Charts */}
+          <div className="flex flex-row lg:flex-col gap-2 md:gap-4" style={{ minHeight: '120px' }}>
             <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all flex-1">
-              <CardContent className="p-5 h-full flex flex-col">
-                <h3 className="text-base font-semibold text-slate-100 mb-2">{t.education.certificationProgress}</h3>
-                <div className="flex-1 min-h-0">
+              <CardContent className="p-2 md:p-5 h-full flex flex-col">
+                <h3 className="text-[10px] md:text-base font-semibold text-slate-100 mb-1 md:mb-2">{t.education.certificationProgress}</h3>
+                <div className="flex-1 min-h-0" style={{ minHeight: '80px' }}>
                   <CertificationProgress data={cvData.certificationTimeline} language={language} />
                 </div>
               </CardContent>
             </Card>
 
             <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_24px_rgba(6,182,212,0.2)] transition-all flex-1">
-              <CardContent className="p-5 h-full flex flex-col">
-                <h3 className="text-base font-semibold text-slate-100 mb-2">{t.analytics.impactMetrics}</h3>
-                <div className="flex-1 min-h-0">
+              <CardContent className="p-2 md:p-5 h-full flex flex-col">
+                <h3 className="text-[10px] md:text-base font-semibold text-slate-100 mb-1 md:mb-2">{t.analytics.impactMetrics}</h3>
+                <div className="flex-1 min-h-0" style={{ minHeight: '80px' }}>
                   <ImpactMetrics data={cvData.impactMetrics} language={language} />
                 </div>
               </CardContent>
@@ -364,18 +367,30 @@ const DashboardSlides = () => {
     <div className="min-h-screen bg-slate-950 text-slate-100 overflow-hidden">
       {/* Header */}
       <header className="fixed top-0 w-full bg-slate-900/90 backdrop-blur-md border-b border-slate-800 z-50">
-        <div className="max-w-7xl mx-auto px-2 md:px-6 py-2 md:py-3 flex justify-between items-center">
-          <h1 className="text-sm md:text-lg font-bold text-cyan-400 flex-shrink-0">José Manuel Ortega</h1>
+        <div className="max-w-7xl mx-auto px-2 md:px-6 py-1.5 md:py-3 flex justify-between items-center">
+          {/* Name - Hidden on very small screens */}
+          <h1 className="hidden sm:block text-sm md:text-lg font-bold text-cyan-400 flex-shrink-0">José Manuel Ortega</h1>
+          
+          {/* Language Toggle - Left side on mobile */}
+          <Button 
+            onClick={toggleLanguage}
+            variant="outline"
+            size="sm"
+            className="sm:hidden border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 text-[10px] px-1.5 py-1 flex-shrink-0"
+          >
+            <Languages className="w-3 h-3 mr-0.5" />
+            {language === 'en' ? 'ES' : 'EN'}
+          </Button>
           
           {/* Navigation Buttons - Responsive */}
-          <nav className="flex-1 flex justify-center gap-1 md:gap-8 items-center mx-2 md:mx-12">
+          <nav className="flex-1 flex justify-center gap-0.5 md:gap-8 items-center mx-1 md:mx-12">
             <Button
               onClick={() => setCurrentSlide(0)}
               size="sm"
               className={`${currentSlide === 0 
                 ? "bg-cyan-300 text-slate-900 hover:bg-cyan-200" 
                 : "bg-white text-cyan-600 hover:bg-cyan-50"} 
-                px-2 py-1 md:px-8 md:py-6 text-[10px] md:text-lg font-semibold`}
+                px-1.5 py-0.5 md:px-8 md:py-6 text-[9px] md:text-lg font-semibold`}
             >
               {t.nav.about}
             </Button>
@@ -385,7 +400,7 @@ const DashboardSlides = () => {
               className={`${currentSlide === 1 
                 ? "bg-cyan-300 text-slate-900 hover:bg-cyan-200" 
                 : "bg-white text-cyan-600 hover:bg-cyan-50"} 
-                px-2 py-1 md:px-8 md:py-6 text-[10px] md:text-lg font-semibold`}
+                px-1.5 py-0.5 md:px-8 md:py-6 text-[9px] md:text-lg font-semibold`}
             >
               {t.nav.experience}
             </Button>
@@ -395,7 +410,7 @@ const DashboardSlides = () => {
               className={`${currentSlide === 2 
                 ? "bg-cyan-300 text-slate-900 hover:bg-cyan-200" 
                 : "bg-white text-cyan-600 hover:bg-cyan-50"} 
-                px-2 py-1 md:px-8 md:py-6 text-[10px] md:text-lg font-semibold`}
+                px-1.5 py-0.5 md:px-8 md:py-6 text-[9px] md:text-lg font-semibold`}
             >
               {t.nav.skills}
             </Button>
@@ -405,18 +420,18 @@ const DashboardSlides = () => {
               className={`${currentSlide === 3 
                 ? "bg-cyan-300 text-slate-900 hover:bg-cyan-200" 
                 : "bg-white text-cyan-600 hover:bg-cyan-50"} 
-                px-2 py-1 md:px-8 md:py-6 text-[10px] md:text-lg font-semibold`}
+                px-1.5 py-0.5 md:px-8 md:py-6 text-[9px] md:text-lg font-semibold`}
             >
               {t.nav.education}
             </Button>
           </nav>
 
-          {/* Language Toggle - Right side */}
+          {/* Language Toggle - Right side on desktop */}
           <Button 
             onClick={toggleLanguage}
             variant="outline"
             size="sm"
-            className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 text-xs md:text-sm px-2 md:px-3 flex-shrink-0"
+            className="hidden sm:flex border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 text-xs md:text-sm px-2 md:px-3 flex-shrink-0"
           >
             <Languages className="w-3 h-3 md:w-4 md:h-4 mr-1" />
             {language === 'en' ? 'ES' : 'EN'}
