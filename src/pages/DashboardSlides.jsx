@@ -297,7 +297,7 @@ const DashboardSlides = () => {
         <Card className="bg-slate-900/50 border-slate-800 shadow-[0_8px_16px_rgba(0,0,0,0.4)] transition-all">
           <CardContent className="p-2 md:p-5">
             <h3 className="text-sm md:text-lg font-semibold text-slate-100 mb-1 md:mb-2">{t.analytics.technologyExperience}</h3>
-            <div className="h-[200px] md:h-[320px]">
+            <div className="h-[280px] md:h-[320px]">
               <TechnologyChart data={cvData.technologyUsage} language={language} />
             </div>
           </CardContent>
